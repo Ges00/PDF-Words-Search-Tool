@@ -4,21 +4,16 @@ import re
 import os
 
 '''
-Programma per la ricerca di parole nei PDF, inserire la parola da cercare e il path nel quale
-ci sono i file PDF. il programma cercherà le parole all'interno di tutti i file ritornando il
-nome dei PDF in cui ha ottenuto dei risultati e il numero di pagine in cui ha riscontrato la parola
+This program is used to search words in PDF files, insert the word you want to searche and the path
+in which are stored the PDF files. The program will search words inside all files giving back the
+name of the PDF files in which it has found results, and the number of times the word appeard.
 
-N.B. non funziona per tutti i file PDF, con alcuni da problemi la libreria PyPDF2. ci si aspetta dei
-miglioramenti da parte dei creatori in futuro
+DISCLAIMER: this doesn't work for all type of PDF files, some have troubles with the library PyPDF2, depending
+on which generator system has been used to create the PDF file. 
 '''
 
-#inserire il path che identifica la cartella di ricerca
-#my_dir="D:/Nine/UNI/ProvaPdf"
 
-#inserire la parola che si desidera cercare
-#word = "Amministrazione"
-
-# searches the word iin the specific pdf_object, gives bakc the number of results
+# searches the word in the specific pdf_object, gives back the number of results
 def search_word(pdf_object, word_to_search, num_pages):
     results=0
     # extract text and do the search
@@ -35,7 +30,7 @@ def search_word(pdf_object, word_to_search, num_pages):
         ResSearch=None
     return results
 
-# searches pdf files in the directory and gives back the results of the searched word
+# searches PDF files in the directory and gives back the results of the searched word
 def analize_pdfs(my_dir, word_to_search):
     for file in os.listdir(my_dir):
         if file.endswith(".pdf"):
@@ -47,20 +42,12 @@ def analize_pdfs(my_dir, word_to_search):
                 print("\n" + file +  "; Number of results: " + str(results))
 
 
-print("\n--------------------------------------------------------------------------------\n")
-print("DISCLAIMER: il programma è CASE SENTISIVE. Il numero di risultati identifica " +
-      "il numero di pagine pdf in cui compare la parola cercata. La ricerca potrebbe " +
-      "risultare nulla per alcuni file PDF, in base al modo in cui sono stati generati " +
-      "se succede per un file PDF succederà molto probabilmente per tutti gli altri " +
-      "dello stesso *pacchetto*")
-print("\n--------------------------------------------------------------------------------\n")
-
 quit=1
 while(quit==1):
-    my_dir=input("inserire il path della directory: ")
-    word=input("inserire parola da cercare: ")
+    my_dir=input("Insert the dircetory path: ")
+    word=input("Insert the word you want to search: ")
     analize_pdfs(my_dir, word)
-    if (not(input("continuare la ricerca? (y/n) ")=="y")):
+    if (not(input("continue searching? (y/n) ")=="y")):
         quit=0
-        print("ciao ciao!")
+        print("bye bye!")
     print("\n")
